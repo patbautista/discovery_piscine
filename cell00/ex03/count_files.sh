@@ -1,2 +1,2 @@
-echo "Files: $(find . -maxdepth 1 -type f ! -name . -printf '.' | wc -c)"
-echo "Directories: $(find . -maxdepth 1 -type d ! -name . -printf '.' | wc -c)"
+echo "Files: $(ls -l | grep -c '^-')"
+echo "Directories: $(ls -l | grep -c '^d')"
