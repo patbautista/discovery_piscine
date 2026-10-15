@@ -10,224 +10,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <style>
-    /* Global Color Variables & Constants */
-    :root {
-      --bg-main: #ffffff;
-      --bg-card: #f8f9fa;
-      --border-color: #e2e8f0;
-      --accent-orange: #FF6B00;
-      --accent-orange-hover: #e05e00;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --nav-height: 72px;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      padding-bottom: 80px; /* Space for fixed bottom footer */
-    }
-
-    /* Single Page Application (SPA) View Controller */
-    .view-section {
-      display: none;
-      min-height: calc(100vh - 80px);
-    }
-    .view-section.active {
-      display: block;
-    }
-
-    /* Navigation Bar */
-    .custom-navbar {
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-      height: var(--nav-height);
-      z-index: 1030;
-    }
-
-    /* Piscine Rush Brand Logo Formatting */
-    .brand-logo {
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      font-size: 1.15rem;
-    }
-    .brand-logo .code-icon {
-      color: var(--accent-orange);
-      font-weight: 700;
-    }
-    .brand-logo .brand-highlight {
-      color: var(--accent-orange);
-    }
-
-    .nav-link {
-      color: var(--text-muted) !important;
-      font-weight: 500;
-      font-size: 0.95rem;
-      padding: 0.5rem 1rem !important;
-      transition: all 0.2s ease;
-    }
-
-    .nav-link:hover, .nav-link.active {
-      color: var(--accent-orange) !important;
-    }
-
-    /* Interactive Buttons */
-    .btn-orange {
-      background-color: var(--accent-orange);
-      color: #ffffff;
-      font-weight: 600;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-orange:hover {
-      background-color: var(--accent-orange-hover);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
-    }
-
-    .btn-outline-orange {
-      border: 1px solid var(--accent-orange);
-      color: var(--accent-orange);
-      font-weight: 600;
-      background: transparent;
-      padding: 0.5rem 1.25rem;
-      border-radius: 20px;
-      transition: all 0.2s ease;
-    }
-
-    .btn-outline-orange:hover {
-      background-color: var(--accent-orange);
-      color: #ffffff;
-    }
-
-    /* Component Cards & Badges */
-    .section-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background-color: rgba(255, 107, 0, 0.08);
-      color: var(--accent-orange);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.4rem 0.85rem;
-      border-radius: 50px;
-      border: 1px solid rgba(255, 107, 0, 0.2);
-    }
-
-    .profile-card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 2.5rem;
-      transition: all 0.3s ease;
-      height: 100%;
-    }
-
-    .profile-card:hover {
-      border-color: var(--accent-orange);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
-    }
-
-    .avatar-img {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid var(--accent-orange);
-    }
-
-    .skill-badge {
-      background-color: #ffffff;
-      color: var(--text-main);
-      border: 1px solid var(--border-color);
-      padding: 0.4rem 0.85rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: inline-block;
-      margin-bottom: 0.5rem;
-    }
-
-    /* Timeline Components */
-    .timeline-item {
-      position: relative;
-      padding-left: 2rem;
-      border-left: 2px solid var(--border-color);
-      padding-bottom: 2rem;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -7px;
-      top: 0;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: var(--accent-orange);
-    }
-
-    /* Contact Links */
-    .contact-item {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
-      padding: 1.25rem;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      color: var(--text-main);
-      transition: all 0.2s ease;
-    }
-
-    .contact-item:hover {
-      border-color: var(--accent-orange);
-      color: var(--accent-orange);
-      transform: translateX(4px);
-    }
-
-    .contact-icon {
-      width: 44px;
-      height: 44px;
-      background-color: rgba(255, 107, 0, 0.1);
-      color: var(--accent-orange);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-    }
-
-    .content-offset {
-      padding-top: calc(var(--nav-height) + 2rem);
-    }
-
-    /* Universal Footer Styling */
-    footer {
-      background-color: #ffffff;
-      border-top: 1px solid var(--border-color);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1020;
-    }
-  </style>
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -355,8 +139,6 @@
           <div class="col-lg-7">
             <h4 class="fw-bold mb-4">Professional Experience &amp; Projects</h4>
             
-            
-
             <!-- Job 1 -->
             <div class="timeline-item">
               <span class="badge bg-light text-dark border mb-2">Oct 2020 – Jan 2022</span>
@@ -368,8 +150,6 @@
                 <li>Maximized team productivity and system reliability by leading a cross-functional team of 10+ specialists, standardizing SOPs, and establishing escalation protocols.</li>
               </ul>
             </div>
-
-            
 
             <!-- Project -->
             <div class="timeline-item">
@@ -447,10 +227,10 @@
 
             <h5 class="fw-bold mb-3">Education</h5>
             <ul class="text-muted small ps-3">
-              <li class="mb-2"><strong>AWS re/Start Program</strong> • Alabang, Muntinlupa City (Aug – Nov 2026)[cite: 3, 8]</li>
-              <li class="mb-2"><strong>AI Prompting for Automation III</strong> • iACADEMY, Makati (Jul – Aug 2026)[cite: 3, 8]</li>
-              <li class="mb-2"><strong>Bachelor of Landscape Architecture</strong> • University of the Philippines Diliman (2013–2017)[cite: 3, 8]</li>
-              <li class="mb-2"><strong>Certificate in Fine Arts (Visual Arts)</strong> • University of the Philippines Baguio (2011–2013)[cite: 3, 8]</li>
+              <li class="mb-2"><strong>AWS re/Start Program</strong> • Alabang, Muntinlupa City (Aug – Nov 2026)</li>
+              <li class="mb-2"><strong>AI Prompting for Automation III</strong> • iACADEMY, Makati (Jul – Aug 2026)</li>
+              <li class="mb-2"><strong>Bachelor of Landscape Architecture</strong> • University of the Philippines Diliman (2013–2017)</li>
+              <li class="mb-2"><strong>Certificate in Fine Arts (Visual Arts)</strong> • University of the Philippines Baguio (2011–2013)</li>
             </ul>
           </div>
         </div>
@@ -535,7 +315,7 @@
           </div>
           <div class="col-md-8">
             <h3 class="fw-bold mb-3">Photo Editing Specialist &amp; Visual Content Director</h3>
-            <p class="text-muted">Experienced Photo Editing Specialist with 6+ years delivering high-quality images for portraits, product photography, and real estate marketing[cite: 6]. Expert in Adobe Lightroom and Photoshop, skilled in advanced retouching, color correction, resizing, and batch processing with high-volume workflows[cite: 6]. Proven ability to meet tight deadlines while maintaining exceptional attention to detail and brand consistency[cite: 6].</p>
+            <p class="text-muted">Experienced Photo Editing Specialist with 6+ years delivering high-quality images for portraits, product photography, and real estate marketing. Expert in Adobe Lightroom and Photoshop, skilled in advanced retouching, color correction, resizing, and batch processing with high-volume workflows. Proven ability to meet tight deadlines while maintaining exceptional attention to detail and brand consistency.</p>
             <div class="d-flex flex-wrap gap-2 pt-2">
               <span class="skill-badge"><i class="bi bi-patch-check-fill text-primary me-1"></i> Adobe Lightroom &amp; Photoshop Expert</span>
               <span class="skill-badge"><i class="bi bi-check-circle-fill text-success me-1"></i> MLS &amp; E-Commerce Optimization</span>
@@ -561,11 +341,11 @@
               <h5 class="fw-bold mb-1">Photo Editing Specialist</h5>
               <p class="text-muted small mb-2">Changing Spaces SRS • Lincoln, Nebraska</p>
               <ul class="text-muted small ps-3">
-                <li>Edited and enhanced 800+ auction estate images daily using Adobe Lightroom and Photoshop[cite: 6].</li>
-                <li>Performed precise photo resizing, cropping, and formatting for MLS and web listing compliance[cite: 6].</li>
-                <li>Uploaded and organized final image sets into the client's content management system (CMS)[cite: 6].</li>
-                <li>Applied basic color correction, cropping, sharpening, and lighting adjustments[cite: 6].</li>
-                <li>Ensured all uploaded files were optimized for web performance and visual clarity across devices[cite: 6].</li>
+                <li>Edited and enhanced 800+ auction estate images daily using Adobe Lightroom and Photoshop.</li>
+                <li>Performed precise photo resizing, cropping, and formatting for MLS and web listing compliance.</li>
+                <li>Uploaded and organized final image sets into the client's content management system (CMS).</li>
+                <li>Applied basic color correction, cropping, sharpening, and lighting adjustments.</li>
+                <li>Ensured all uploaded files were optimized for web performance and visual clarity across devices.</li>
               </ul>
             </div>
 
@@ -575,9 +355,9 @@
               <h5 class="fw-bold mb-1">Freelance Photographer</h5>
               <p class="text-muted small mb-2">Snappr</p>
               <ul class="text-muted small ps-3">
-                <li>Captured vibrant and compelling event and product photos, thoughtfully focusing on composition, lighting, and detail to bring each subject to life[cite: 6].</li>
-                <li>Managed on-site logistics with flexibility, adapting smoothly to changing lighting and weather to ensure every shot looked its best[cite: 6].</li>
-                <li>Built strong, trusting relationships through clear communication and professionalism, resulting in happy clients and repeat opportunities[cite: 6].</li>
+                <li>Captured vibrant and compelling event and product photos, thoughtfully focusing on composition, lighting, and detail to bring each subject to life.</li>
+                <li>Managed on-site logistics with flexibility, adapting smoothly to changing lighting and weather to ensure every shot looked its best.</li>
+                <li>Built strong, trusting relationships through clear communication and professionalism, resulting in happy clients and repeat opportunities.</li>
               </ul>
             </div>
 
@@ -587,11 +367,11 @@
               <h5 class="fw-bold mb-1">Social Media Manager</h5>
               <p class="text-muted small mb-2">Onlinejobs PH • Multiple Clients United States</p>
               <ul class="text-muted small ps-3">
-                <li>Served as photo department representative on cross-functional design teams, ensuring visual content aligned with storytelling and brand features[cite: 7].</li>
-                <li>Managed photo editing staff for Creative and Marketing teams, enforcing high-quality standards and optimizing workflow efficiency[cite: 7].</li>
-                <li>Transformed long-form content (blogs, podcasts, white papers) into engaging micro-content formats including short videos, stories, snaps, and memes tailored to each social media platform[cite: 7].</li>
-                <li>Developed and curated comprehensive content calendars across multiple brands and platforms, driving a 130% increase in organic social media followers[cite: 7].</li>
-                <li>Managed and strengthened customer engagement by responding to over 200% of serious inquiries and comments within a 12-hour response window, improving customer satisfaction and brand loyalty[cite: 7].</li>
+                <li>Served as photo department representative on cross-functional design teams, ensuring visual content aligned with storytelling and brand features.</li>
+                <li>Managed photo editing staff for Creative and Marketing teams, enforcing high-quality standards and optimizing workflow efficiency.</li>
+                <li>Transformed long-form content (blogs, podcasts, white papers) into engaging micro-content formats including short videos, stories, snaps, and memes tailored to each social media platform.</li>
+                <li>Developed and curated comprehensive content calendars across multiple brands and platforms, driving a 130% increase in organic social media followers.</li>
+                <li>Managed and strengthened customer engagement by responding to over 200% of serious inquiries and comments within a 12-hour response window, improving customer satisfaction and brand loyalty.</li>
               </ul>
             </div>
 
@@ -601,9 +381,9 @@
               <h5 class="fw-bold mb-1">Photo Editing Lead</h5>
               <p class="text-muted small mb-2">Luxclusif (Farfetch) • Makati City, Philippines</p>
               <ul class="text-muted small ps-3">
-                <li>Procured, edited, processed, and edited all published content for the eCommerce website. Ownership for all Photography and Photo Editing-related KPIs and KR output. Optimize flow reducing overall process time and stakeholder resources[cite: 6].</li>
-                <li>Reviewed and edited photos ahead of the final evaluation verifying content conformed to the color grading, colour tone and brand guidelines[cite: 6].</li>
-                <li>Coordinated with photographers and successfully improved and streamlined the editing process in the editing pipeline generating a 35% increase rate in our monthly KPI[cite: 6].</li>
+                <li>Procured, edited, processed, and edited all published content for the eCommerce website. Ownership for all Photography and Photo Editing-related KPIs and KR output. Optimize flow reducing overall process time and stakeholder resources.</li>
+                <li>Reviewed and edited photos ahead of the final evaluation verifying content conformed to the color grading, colour tone and brand guidelines.</li>
+                <li>Coordinated with photographers and successfully improved and streamlined the editing process in the editing pipeline generating a 35% increase rate in our monthly KPI.</li>
               </ul>
             </div>
 
@@ -613,11 +393,11 @@
               <h5 class="fw-bold mb-1">Wedding Photographer</h5>
               <p class="text-muted small mb-2">MCPF Studios | Oh Shoot Studio | Beyond Moments • Manila PH</p>
               <ul class="text-muted small ps-3">
-                <li>Organized and managed event photoshoots, including planning, scheduling, styling, and overseeing post-production processes to ensure seamless execution[cite: 7].</li>
-                <li>Developed story narratives and detailed outlines to guide photographers in creating cohesive wedding shoot output[cite: 7].</li>
-                <li>Curated compelling images from extensive wedding archives to highlight key moments and themes[cite: 7].</li>
-                <li>Conducted client consultations to align expectations, discuss styles, and finalize contracts[cite: 7].</li>
-                <li>Created and presented engaging slideshows to educate and inspire clients on photography options[cite: 7].</li>
+                <li>Organized and managed event photoshoots, including planning, scheduling, styling, and overseeing post-production processes to ensure seamless execution.</li>
+                <li>Developed story narratives and detailed outlines to guide photographers in creating cohesive wedding shoot output.</li>
+                <li>Curated compelling images from extensive wedding archives to highlight key moments and themes.</li>
+                <li>Conducted client consultations to align expectations, discuss styles, and finalize contracts.</li>
+                <li>Created and presented engaging slideshows to educate and inspire clients on photography options.</li>
               </ul>
             </div>
 
@@ -627,11 +407,11 @@
               <h5 class="fw-bold mb-1">Wedding Photo Editor</h5>
               <p class="text-muted small mb-2">Upwork • Multiple Clients United States</p>
               <ul class="text-muted small ps-3">
-                <li>Edited and processed images and videos ensuring high-quality, on-brand content[cite: 7].</li>
-                <li>Maintained image quality through cropping, color correction, resizing, and retouching[cite: 7].</li>
-                <li>Prioritized and managed daily editing workload to meet tight deadlines[cite: 7].</li>
-                <li>Proficient in Adobe Photoshop, Lightroom, InDesign, Premiere, and asset management software[cite: 7].</li>
-                <li>Uploaded and updated visual content on websites and catalogs for timely online publication[cite: 7].</li>
+                <li>Edited and processed images and videos ensuring high-quality, on-brand content.</li>
+                <li>Maintained image quality through cropping, color correction, resizing, and retouching.</li>
+                <li>Prioritized and managed daily editing workload to meet tight deadlines.</li>
+                <li>Proficient in Adobe Photoshop, Lightroom, InDesign, Premiere, and asset management software.</li>
+                <li>Uploaded and updated visual content on websites and catalogs for timely online publication.</li>
               </ul>
             </div>
           </div>
@@ -685,8 +465,8 @@
 
             <h5 class="fw-bold mb-3">Education</h5>
             <ul class="text-muted small ps-3">
-              <li class="mb-2"><strong>Certificate in Fine Arts Major in Visual Arts</strong> • University of the Philippines Baguio (2011–2013)[cite: 7]</li>
-              <li class="mb-2"><strong>Bachelor of Landscape Architecture</strong> • University of the Philippines Diliman (2013–2017)[cite: 7]</li>
+              <li class="mb-2"><strong>Certificate in Fine Arts Major in Visual Arts</strong> • University of the Philippines Baguio (2011–2013)</li>
+              <li class="mb-2"><strong>Bachelor of Landscape Architecture</strong> • University of the Philippines Diliman (2013–2017)</li>
             </ul>
           </div>
         </div>
@@ -740,21 +520,8 @@
     </div>
   </footer>
 
-  <!-- Bootstrap JS Bundle -->
+  <!-- External JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- Client-side View Switcher logic -->
-  <script>
-    function showView(viewId) {
-      document.querySelectorAll('.view-section').forEach(section => {
-        section.classList.remove('active');
-      });
-      const activeSection = document.getElementById(viewId);
-      if (activeSection) {
-        activeSection.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

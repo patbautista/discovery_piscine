@@ -1,0 +1,216 @@
+/* Global Color Variables & Constants */
+:root {
+  --bg-main: #ffffff;
+  --bg-card: #f8f9fa;
+  --border-color: #e2e8f0;
+  --accent-orange: #FF6B00;
+  --accent-orange-hover: #e05e00;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --nav-height: 72px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  padding-bottom: 80px; /* Space for fixed bottom footer */
+}
+
+/* Single Page Application (SPA) View Controller */
+.view-section {
+  display: none;
+  min-height: calc(100vh - 80px);
+}
+.view-section.active {
+  display: block;
+}
+
+/* Navigation Bar */
+.custom-navbar {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  height: var(--nav-height);
+  z-index: 1030;
+}
+
+/* Piscine Rush Brand Logo Formatting */
+.brand-logo {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  font-size: 1.15rem;
+}
+.brand-logo .code-icon {
+  color: var(--accent-orange);
+  font-weight: 700;
+}
+.brand-logo .brand-highlight {
+  color: var(--accent-orange);
+}
+
+.nav-link {
+  color: var(--text-muted) !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--accent-orange) !important;
+}
+
+/* Interactive Buttons */
+.btn-orange {
+  background-color: var(--accent-orange);
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-orange:hover {
+  background-color: var(--accent-orange-hover);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
+}
+
+.btn-outline-orange {
+  border: 1px solid var(--accent-orange);
+  color: var(--accent-orange);
+  font-weight: 600;
+  background: transparent;
+  padding: 0.5rem 1.25rem;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-orange:hover {
+  background-color: var(--accent-orange);
+  color: #ffffff;
+}
+
+/* Component Cards & Badges */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(255, 107, 0, 0.08);
+  color: var(--accent-orange);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.85rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 107, 0, 0.2);
+}
+
+.profile-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.profile-card:hover {
+  border-color: var(--accent-orange);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+}
+
+.avatar-img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--accent-orange);
+}
+
+.skill-badge {
+  background-color: #ffffff;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+/* Timeline Components */
+.timeline-item {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 2px solid var(--border-color);
+  padding-bottom: 2rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--accent-orange);
+}
+
+/* Contact Links */
+.contact-item {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 1.25rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.contact-item:hover {
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  transform: translateX(4px);
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  background-color: rgba(255, 107, 0, 0.1);
+  color: var(--accent-orange);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.content-offset {
+  padding-top: calc(var(--nav-height) + 2rem);
+}
+
+/* Universal Footer Styling */
+footer {
+  background-color: #ffffff;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1020;
+}

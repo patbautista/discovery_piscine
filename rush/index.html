@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Showcase • Pat & Nicole</title>
+  
+  <!-- External CSS Frameworks & Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Global Color Variables & Constants */
+    :root {
+      --bg-main: #ffffff;
+      --bg-card: #f8f9fa;
+      --border-color: #e2e8f0;
+      --accent-orange: #FF6B00;
+      --accent-orange-hover: #e05e00;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --nav-height: 72px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      padding-bottom: 80px; /* Space for fixed bottom footer */
+    }
+
+    /* Single Page Application (SPA) View Controller */
+    .view-section {
+      display: none;
+      min-height: calc(100vh - 80px);
+    }
+    .view-section.active {
+      display: block;
+    }
+
+    /* Navigation Bar */
+    .custom-navbar {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      height: var(--nav-height);
+      z-index: 1030;
+    }
+
+    /* Piscine Rush Brand Logo Formatting */
+    .brand-logo {
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      font-size: 1.15rem;
+    }
+    .brand-logo .code-icon {
+      color: var(--accent-orange);
+      font-weight: 700;
+    }
+    .brand-logo .brand-highlight {
+      color: var(--accent-orange);
+    }
+
+    .nav-link {
+      color: var(--text-muted) !important;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem !important;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent-orange) !important;
+    }
+
+    /* Interactive Buttons */
+    .btn-orange {
+      background-color: var(--accent-orange);
+      color: #ffffff;
+      font-weight: 600;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-orange:hover {
+      background-color: var(--accent-orange-hover);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
+    }
+
+    .btn-outline-orange {
+      border: 1px solid var(--accent-orange);
+      color: var(--accent-orange);
+      font-weight: 600;
+      background: transparent;
+      padding: 0.5rem 1.25rem;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline-orange:hover {
+      background-color: var(--accent-orange);
+      color: #ffffff;
+    }
+
+    /* Component Cards & Badges */
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(255, 107, 0, 0.08);
+      color: var(--accent-orange);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.85rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 107, 0, 0.2);
+    }
+
+    .profile-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .profile-card:hover {
+      border-color: var(--accent-orange);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .avatar-img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--accent-orange);
+    }
+
+    .skill-badge {
+      background-color: #ffffff;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Timeline Components */
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 2px solid var(--border-color);
+      padding-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -7px;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--accent-orange);
+    }
+
+    /* Contact Links */
+    .contact-item {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent-orange);
+      color: var(--accent-orange);
+      transform: translateX(4px);
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background-color: rgba(255, 107, 0, 0.1);
+      color: var(--accent-orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .content-offset {
+      padding-top: calc(var(--nav-height) + 2rem);
+    }
+
+    /* Universal Footer Styling */
+    footer {
+      background-color: #ffffff;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1020;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =================================================================== -->
+  <!-- PAGE 1: INDEX / HOME VIEW (#home)                                 -->
+  <!-- =================================================================== -->
+  <section id="home" class="view-section active">
+    <!-- Header Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+      <div class="container">
+        <!-- Piscine Rush Brand Logo -->
+        <a class="navbar-brand text-dark d-flex align-items-center gap-1 brand-logo" href="#" onclick="showView('home')">
+          <span class="code-icon">&lt;/&gt;</span> PISCINE<span class="brand-highlight">.RUSH</span>
+        </a>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-orange btn-sm" onclick="showView('pat-cv')">Pat's Resume</button>
+          <button class="btn btn-outline-orange btn-sm" onclick="showView('nicole-cv')">PN's Resume</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Showcase Header -->
+    <div class="container content-offset text-center py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <span class="section-badge mb-3"><i class="bi bi-stars"></i> Showcase Directory</span>
+          <h1 class="display-4 fw-extrabold mb-3 text-dark">Hey there!</h1>
+          <p class="lead text-muted mb-5">From high-converting digital branding and image operations to secure, scalable cloud infrastructure—I help businesses turn complex visual and technical ideas into seamless, production-ready solutions.
+            <br><br>Got a project in mind? Let's talk!</p>
+        </div>
+      </div>
+
+      <!-- Team Showcase Cards Grid -->
+      <div class="row g-4 justify-content-center align-items-stretch">
+        <!-- Pat's Showcase Card -->
+        <div class="col-md-6 col-lg-5">
+          <div class="profile-card d-flex flex-column text-center">
+            <div class="mb-4">
+              <img src="https://drive.google.com/thumbnail?id=1a8uo-zMEZYTMsZrZARwNobMsiXR31n69&sz=w500" alt="Patricia Nicole Bautista" class="avatar-img shadow-sm">
+            </div>
+            <h3 class="fw-bold mb-1">Pat Bautista</h3>
+            <p class="text-muted fw-semibold mb-3">Cloud Developer</p>
+            <p class="small text-muted mb-4 flex-grow-1">Results-driven Technical Operations Specialist with 7+ years of experience managing high-volume, SLA-critical digital asset pipelines, AWS cloud deployments, and AI-enabled automation. </p>
+            <button class="btn btn-orange w-100 mt-auto" onclick="showView('pat-cv')">
+              View Pat's Resume Page <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Nicole's Showcase Card -->
+        <div class="col-md-6 col-lg-5">
+          <div class="profile-card d-flex flex-column text-center">
+            <div class="mb-4">
+              <img src="https://drive.google.com/thumbnail?id=1cGKPSEfoFiXFoX8hohlcWya3f5Zx1tOe&sz=w500" alt="PN Resurreccion" class="avatar-img shadow-sm">
+            </div>
+            <h3 class="fw-bold mb-1">PN Bautista</h3>
+            <p class="text-muted fw-semibold mb-3">Creative Director</p>
+            <p class="small text-muted mb-4 flex-grow-1">Experienced Photo Editing Specialist with 6+ years delivering high-quality images for portraits, product photography, and real estate marketing using Adobe Lightroom and Photoshop. </p>
+            <button class="btn btn-outline-orange w-100 mt-auto" onclick="showView('nicole-cv')">
+              View Nicole's Resume Page <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================================================================== -->
+  <!-- PAGE 2: PAT BAUTISTA RESUME PAGE (#pat-cv)                        -->
+  <!-- =================================================================== -->
+  <section id="pat-cv" class="view-section">
+    <!-- Header Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+      <div class="container">
+        <a class="navbar-brand text-dark d-flex align-items-center gap-1 brand-logo" href="#" onclick="showView('home')">
+          <span class="code-icon">&lt;/&gt;</span> PISCINE<span class="brand-highlight">.RUSH</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#patNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="patNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="#pat-overview">Overview</a></li>
+            <li class="nav-item"><a class="nav-link" href="#pat-experience">Experience &amp; Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#pat-contact">Contact</a></li>
+            <li class="nav-item ms-lg-3">
+              <button class="btn btn-outline-orange btn-sm" onclick="showView('nicole-cv')">Nicole's CV <i class="bi bi-arrow-right ms-1"></i></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Detailed Resume Content Container -->
+    <div class="container content-offset pb-5">
+      <!-- Profile Overview Section -->
+      <div id="pat-overview" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-person-badge"></i> Profile Overview</span>
+        <div class="row align-items-center mt-3 g-4">
+          <div class="col-md-4 text-center">
+            <img src="https://drive.google.com/thumbnail?id=1a8uo-zMEZYTMsZrZARwNobMsiXR31n69&sz=w500" alt="Patricia Nicole Bautista" class="avatar-img shadow-sm mb-3">
+            <h2 class="fw-bold mb-1">Pat Bautista</h2>
+            <p class="text-muted fw-semibold">Cloud Developer</p>
+          </div>
+          <div class="col-md-8">
+            <h3 class="fw-bold mb-3">Technical Operations, Cloud Operations &amp; AI-Enabled Systems</h3>
+            <p class="text-muted">Results-driven Technical Operations Specialist with 7+ years of experience managing high-volume, SLA-critical digital asset pipelines and cross-functional teams. Combines deep operational rigor and systems thinking with hands-on technical upskilling in AWS Cloud infrastructure, Linux administration, and AI-enabled automation. Proven track record of optimizing workflows, reducing turnaround times by 25%, and driving 35% throughput growth through process engineering and quality assurance.</p>
+            <div class="d-flex flex-wrap gap-2 pt-2">
+              <span class="skill-badge"><i class="bi bi-patch-check-fill text-warning me-1"></i> AWS re/Start Program</span>
+              <span class="skill-badge"><i class="bi bi-cpu-fill text-primary me-1"></i> CompTIA AI Essentials</span>
+              <span class="skill-badge"><i class="bi bi-google text-danger me-1"></i> Google AI Professional</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <!-- Work Experience & Skills Matrix -->
+      <div id="pat-experience" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-briefcase"></i> Experience &amp; Skills</span>
+        
+        <div class="row mt-4 g-5">
+          <div class="col-lg-7">
+            <h4 class="fw-bold mb-4">Professional Experience &amp; Projects</h4>
+            
+            
+
+            <!-- Job 1 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Oct 2020 – Jan 2022</span>
+              <h5 class="fw-bold mb-1">Cloud Solutions Associate</h5>
+              <p class="text-muted small mb-2">Luxclusif (Farfetch) • Makati City, Philippines</p>
+              <ul class="text-muted small ps-3">
+                <li>Spearheaded technical media operations and optimized production workflows, increasing monthly asset throughput by 35% while maintaining strict e-commerce publishing standards.</li>
+                <li>Reduced file rejection rates by 20% across multi-channel environments by establishing rigorous QA frameworks covering metadata validation, color calibration, and render speeds.</li>
+                <li>Maximized team productivity and system reliability by leading a cross-functional team of 10+ specialists, standardizing SOPs, and establishing escalation protocols.</li>
+              </ul>
+            </div>
+
+            
+
+            <!-- Project -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Technical Project</span>
+              <h5 class="fw-bold mb-1">AWS Re/Start Program</h5>
+              <p class="text-muted small mb-2">AWS Infrastructure &amp; Networking</p>
+              <ul class="text-muted small ps-3">
+                <li>Architected and configured a custom multi-subnet AWS VPC blueprint, establishing isolated network boundaries, public/private subnets, and secure routing table.</li>
+                <li>Engineered multi-AZ deployments with Internet Gateways and NAT configurations, maintaining 99.9% uptime and business continuity during simulated data center failovers.</li>
+                <li>Enforced stringent Security Group and Network ACL firewall rules following least-privilege access principles, restricting unauthorized inbound vector access.</li>
+                <li>Automated web server provisioning and deployments on EC2 instances using Bash User Data bootstrap scripts, accelerating deployment cycles by 40%.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <h4 class="fw-bold mb-4">Technical Stack &amp; Education</h4>
+            
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">AWS &amp; Cloud Operations</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">AWS EC2</span>
+                <span class="skill-badge">Amazon S3</span>
+                <span class="skill-badge">Amazon VPC</span>
+                <span class="skill-badge">AWS IAM</span>
+                <span class="skill-badge">CloudWatch</span>
+                <span class="skill-badge">Auto Scaling</span>
+                <span class="skill-badge">ALB</span>
+                <span class="skill-badge">AWS CLI</span>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">Linux &amp; Technical Systems</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">Linux CLI / Ubuntu</span>
+                <span class="skill-badge">Amazon Linux</span>
+                <span class="skill-badge">SSH &amp; Cron Jobs</span>
+                <span class="skill-badge">Bash Scripting</span>
+                <span class="skill-badge">Python Fundamentals</span>
+                <span class="skill-badge">Git &amp; GitHub</span>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">Networking &amp; Security</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">TCP/IP &amp; DNS</span>
+                <span class="skill-badge">Subnetting &amp; Route Tables</span>
+                <span class="skill-badge">Internet Gateways</span>
+                <span class="skill-badge">Security Groups &amp; Network ACLs</span>
+                <span class="skill-badge">SSL/TLS &amp; VPN</span>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">AI &amp; Automation</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">Prompt Engineering</span>
+                <span class="skill-badge">Google AI Studio / Gemini</span>
+                <span class="skill-badge">Workflow Automation</span>
+                <span class="skill-badge">Data Analysis &amp; Cleaning</span>
+              </div>
+            </div>
+
+            <hr class="my-4" style="border-color: var(--border-color);">
+
+            <h5 class="fw-bold mb-3">Certifications</h5>
+            <ul class="text-muted small ps-3 mb-4">
+              <li class="mb-2"><strong>CompTIA Certificate of Competency in AI Essentials</strong> • Academy Nexus (Aug 2026):</li>
+              <li class="mb-2"><strong>Google AI Professional Certificate</strong> • Grow with Google (Sep 2026)</li>
+              <li class="mb-2"><strong>Foundations of User Experience (UX) Design</strong> • Google / Coursera (Jun 2023)</li>
+              <li class="mb-2"><strong>SEO Bootcamp Graduation Certificate</strong> • KODA CAMP (Dec 2025)</li>
+            </ul>
+
+            <h5 class="fw-bold mb-3">Education</h5>
+            <ul class="text-muted small ps-3">
+              <li class="mb-2"><strong>AWS re/Start Program</strong> • Alabang, Muntinlupa City (Aug – Nov 2026)</li>
+              <li class="mb-2"><strong>AI Prompting for Automation III</strong> • iACADEMY, Makati (Jul – Aug 2026)</li>
+              <li class="mb-2"><strong>Bachelor of Landscape Architecture</strong> • University of the Philippines Diliman (2013–2017)</li>
+              <li class="mb-2"><strong>Certificate in Fine Arts (Visual Arts)</strong> • University of the Philippines Baguio (2011–2013)
+            </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <!-- Direct Contact Details -->
+      <div id="pat-contact" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-envelope"></i> Contact Details</span>
+        <h3 class="fw-bold mb-4">Get In Touch With Pat</h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4">
+            <a href="mailto:takeyoutothefutur@gmail.com" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">Email Address</small>
+                <span class="fw-bold">takeyoutothefutur@gmail.com</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="https://www.linkedin.com/in/patbautista-cloudtech/" target="_blank" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-linkedin"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">LinkedIn Profile</small>
+                <span class="fw-bold">/in/patbautista-cloudtech</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="tel:+639052897334" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">Contact Phone</small>
+                <span class="fw-bold">+63 905 289 7334</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================================================================== -->
+  <!-- PAGE 3: P RESURRECCION RESUME PAGE (#nicole-cv)                -->
+  <!-- =================================================================== -->
+  <section id="nicole-cv" class="view-section">
+    <!-- Header Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+      <div class="container">
+        <a class="navbar-brand text-dark d-flex align-items-center gap-1 brand-logo" href="#" onclick="showView('home')">
+          <span class="code-icon">&lt;/&gt;</span> PISCINE<span class="brand-highlight">.RUSH</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nicoleNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nicoleNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="#nicole-overview">Overview</a></li>
+            <li class="nav-item"><a class="nav-link" href="#nicole-experience">Experience &amp; Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#nicole-contact">Contact</a></li>
+            <li class="nav-item ms-lg-3">
+              <button class="btn btn-outline-orange btn-sm" onclick="showView('pat-cv')"><i class="bi bi-arrow-left me-1"></i> Pat's CV</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Detailed Resume Content Container -->
+    <div class="container content-offset pb-5">
+      <!-- Profile Overview Section -->
+      <div id="nicole-overview" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-palette"></i> Profile Overview</span>
+        <div class="row align-items-center mt-3 g-4">
+          <div class="col-md-4 text-center">
+            <img src="https://drive.google.com/thumbnail?id=1cGKPSEfoFiXFoX8hohlcWya3f5Zx1tOe&sz=w500" alt="Profile portrait of PN Resurreccion, a creative director." class="avatar-img shadow-sm mb-3">
+            <h2 class="fw-bold mb-1">PN Resurreccion</h2>
+            <p class="text-muted fw-semibold">Creative Director</p>
+          </div>
+          <div class="col-md-8">
+            <h3 class="fw-bold mb-3">Photo Editing Specialist &amp; Visual Content Director</h3>
+            <p class="text-muted">Experienced Photo Editing Specialist with 6+ years delivering high-quality images for portraits, product photography, and real estate marketing. Expert in Adobe Lightroom and Photoshop, skilled in advanced retouching, color correction, resizing, and batch processing with high-volume workflows. Proven ability to meet tight deadlines while maintaining exceptional attention to detail and brand consistency.</p>
+            <div class="d-flex flex-wrap gap-2 pt-2">
+              <span class="skill-badge"><i class="bi bi-patch-check-fill text-primary me-1"></i> Adobe Lightroom &amp; Photoshop Expert</span>
+              <span class="skill-badge"><i class="bi bi-check-circle-fill text-success me-1"></i> MLS &amp; E-Commerce Optimization</span>
+              <span class="skill-badge"><i class="bi bi-stars text-warning me-1"></i> High-Volume Batch Processing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <!-- Work Experience & Skills Matrix -->
+      <div id="nicole-experience" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-briefcase"></i> Experience &amp; Skills</span>
+        
+        <div class="row mt-4 g-5">
+          <div class="col-lg-7">
+            <h4 class="fw-bold mb-4">Work Experience</h4>
+            
+            <!-- Job 1 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Jul 2023 – Present</span>
+              <h5 class="fw-bold mb-1">Photo Editing Specialist</h5>
+              <p class="text-muted small mb-2">Changing Spaces SRS • Lincoln, Nebraska</p>
+              <ul class="text-muted small ps-3">
+                <li>Edited and enhanced 800+ auction estate images daily using Adobe Lightroom and Photoshop.</li>
+                <li>Performed precise photo resizing, cropping, and formatting for MLS and web listing compliance.</li>
+                <li>Uploaded and organized final image sets into the client's content management system (CMS).</li>
+                <li>Applied basic color correction, cropping, sharpening, and lighting adjustments.</li>
+                <li>Ensured all uploaded files were optimized for web performance and visual clarity across devices.</li>
+              </ul>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Feb 2022 – Present</span>
+              <h5 class="fw-bold mb-1">Freelance Photographer</h5>
+              <p class="text-muted small mb-2">Snappr</p>
+              <ul class="text-muted small ps-3">
+                <li>Captured vibrant and compelling event and product photos, thoughtfully focusing on composition, lighting, and detail to bring each subject to life.</li>
+                <li>Managed on-site logistics with flexibility, adapting smoothly to changing lighting and weather to ensure every shot looked its best.</li>
+                <li>Built strong, trusting relationships through clear communication and professionalism, resulting in happy clients and repeat opportunities.</li>
+              </ul>
+            </div>
+
+            <!-- Job 3 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Nov 2021 – Jun 2022</span>
+              <h5 class="fw-bold mb-1">Social Media Manager</h5>
+              <p class="text-muted small mb-2">Onlinejobs PH • Multiple Clients United States</p>
+              <ul class="text-muted small ps-3">
+                <li>Served as photo department representative on cross-functional design teams, ensuring visual content aligned with storytelling and brand features.</li>
+                <li>Managed photo editing staff for Creative and Marketing teams, enforcing high-quality standards and optimizing workflow efficiency.</li>
+                <li>Transformed long-form content (blogs, podcasts, white papers) into engaging micro-content formats including short videos, stories, snaps, and memes tailored to each social media platform.</li>
+                <li>Developed and curated comprehensive content calendars across multiple brands and platforms, driving a 130% increase in organic social media followers.</li>
+                <li>Managed and strengthened customer engagement by responding to over 200% of serious inquiries and comments within a 12-hour response window, improving customer satisfaction and brand loyalty.</li>
+              </ul>
+            </div>
+
+            <!-- Job 4 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Oct 2020 – Jan 2022</span>
+              <h5 class="fw-bold mb-1">Photo Editing Lead</h5>
+              <p class="text-muted small mb-2">Luxclusif (Farfetch) • Makati City, Philippines</p>
+              <ul class="text-muted small ps-3">
+                <li>Procured, edited, processed, and edited all published content for the eCommerce website. Ownership for all Photography and Photo Editing-related KPIs and KR output. Optimize flow reducing overall process time and stakeholder resources.</li>
+                <li>Reviewed and edited photos ahead of the final evaluation verifying content conformed to the color grading, colour tone and brand guidelines.</li>
+                <li>Coordinated with photographers and successfully improved and streamlined the editing process in the editing pipeline generating a 35% increase rate in our monthly KPI.</li>
+              </ul>
+            </div>
+
+            <!-- Job 5 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Aug 2019 – Jan 2021</span>
+              <h5 class="fw-bold mb-1">Wedding Photographer</h5>
+              <p class="text-muted small mb-2">MCPF Studios | Oh Shoot Studio | Beyond Moments • Manila PH</p>
+              <ul class="text-muted small ps-3">
+                <li>Organized and managed event photoshoots, including planning, scheduling, styling, and overseeing post-production processes to ensure seamless execution.</li>
+                <li>Developed story narratives and detailed outlines to guide photographers in creating cohesive wedding shoot output.</li>
+                <li>Curated compelling images from extensive wedding archives to highlight key moments and themes.</li>
+                <li>Conducted client consultations to align expectations, discuss styles, and finalize contracts.</li>
+                <li>Created and presented engaging slideshows to educate and inspire clients on photography options.</li>
+              </ul>
+            </div>
+
+            <!-- Job 6 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Mar 2017 – Present</span>
+              <h5 class="fw-bold mb-1">Wedding Photo Editor</h5>
+              <p class="text-muted small mb-2">Upwork • Multiple Clients United States</p>
+              <ul class="text-muted small ps-3">
+                <li>Edited and processed images and videos ensuring high-quality, on-brand content.</li>
+                <li>Maintained image quality through cropping, color correction, resizing, and retouching.</li>
+                <li>Prioritized and managed daily editing workload to meet tight deadlines.</li>
+                <li>Proficient in Adobe Photoshop, Lightroom, InDesign, Premiere, and asset management software.</li>
+                <li>Uploaded and updated visual content on websites and catalogs for timely online publication.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <h4 class="fw-bold mb-4">Tech Stack &amp; Skills</h4>
+            
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">Tech Stack</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">Adobe Photoshop</span>
+                <span class="skill-badge">Adobe Lightroom</span>
+                <span class="skill-badge">Adobe Bridge</span>
+                <span class="skill-badge">Adobe Illustrator</span>
+                <span class="skill-badge">Capture One Pro</span>
+                <span class="skill-badge">Luminar AI</span>
+                <span class="skill-badge">Adobe Camera Raw (ACR)</span>
+                <span class="skill-badge">Google Workspace</span>
+                <span class="skill-badge">Apple Ecosystem</span>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">Technical Skills</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">Image Quality Control (QC)</span>
+                <span class="skill-badge">Color Correction</span>
+                <span class="skill-badge">Real Estate Photo Editing</span>
+                <span class="skill-badge">Product Clean Up</span>
+                <span class="skill-badge">Wedding Photo Editing</span>
+                <span class="skill-badge">Photo Manipulation</span>
+                <span class="skill-badge">File Optimization &amp; Exporting</span>
+                <span class="skill-badge">Remote Collaboration</span>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">Core Skills &amp; Working Tools</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">Brand Marketing</span>
+                <span class="skill-badge">Content Creation</span>
+                <span class="skill-badge">Strategy &amp; Planning</span>
+                <span class="skill-badge">Figma</span>
+                <span class="skill-badge">Canva</span>
+                <span class="skill-badge">Notion</span>
+                <span class="skill-badge">Airtable</span>
+              </div>
+            </div>
+
+            <hr class="my-4" style="border-color: var(--border-color);">
+
+            <h5 class="fw-bold mb-3">Education</h5>
+            <ul class="text-muted small ps-3">
+              <li class="mb-2"><strong>Certificate in Fine Arts Major in Visual Arts</strong> • University of the Philippines Baguio (2011–2013)</li>
+              <li class="mb-2"><strong>Bachelor of Landscape Architecture</strong> • University of the Philippines Diliman (2013–2017)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <!-- Direct Contact Details -->
+      <div id="nicole-contact" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-envelope"></i> Contact Details</span>
+        <h3 class="fw-bold mb-4">Get In Touch With Nicole</h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4">
+            <a href="mailto:takeyoutothefutur@gmail.com" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">Email Address</small>
+                <span class="fw-bold">takeyoutothefutur@gmail.com</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="tel:+639052897334" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">Contact Phone</small>
+                <span class="fw-bold">+63 905 289 7334</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="https://www.linkedin.com/in/patbautista-cloudtech/" target="_blank" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-linkedin"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">LinkedIn Profile</small>
+                <span class="fw-bold">Connect on LinkedIn</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- UNIVERSAL FOOTER                                                   -->
+  <!-- =================================================================== -->
+  <footer class="text-center py-3">
+    <div class="container">
+      <p class="mb-0">&copy; 2026 Pat Bautista &amp; PN Resurreccion. 42 Piscine Rush Project.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Client-side View Switcher logic -->
+  <script>
+    function showView(viewId) {
+      document.querySelectorAll('.view-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      const activeSection = document.getElementById(viewId);
+      if (activeSection) {
+        activeSection.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
+</body>
+</html>
