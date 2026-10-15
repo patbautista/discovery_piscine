@@ -1,0 +1,32 @@
+/* Ensure the body fills the entire viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* Smooth transition for background color changes */
+    transition: background-color 0.3s ease;
+}
+
+/* Center the button on the screen */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff; /* Initial default background color */
+}
+
+/* Simple button styling */
+#colorBtn {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    border: 1px solid #333;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+
+/* Hover effect for better visual feedback */
+#colorBtn:hover {
+    background-color: #f0f0f0;
+}

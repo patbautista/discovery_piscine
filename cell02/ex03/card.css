@@ -1,0 +1,90 @@
+/* Center the entire card on the screen with a light background */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Outer card container styling */
+.card {
+    background-color: #ffffff;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Header style at the top of the card */
+.card-header {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* Invisible table properties to cleanly align card rows */
+.profile-table {
+    width: 100%;
+    border-collapse: collapse; /* Removes spacing between table cells */
+    border: none; /* Keeps table border invisible */
+}
+
+.profile-table td {
+    padding: 10px 15px;
+    border: none; /* Keeps cell borders invisible */
+}
+
+/* Profile Picture styling */
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Makes image circular */
+    object-fit: cover;
+    margin-top: 10px;
+}
+
+/* Login text styling */
+.login {
+    font-size: 20px;
+    color: #222;
+}
+
+/* 2-3 word description text styling */
+.description {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Lined-up social network icons */
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    margin: 0 8px;
+}
+
+/* Clickable contact button styling */
+.contact-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80%;
+    margin-bottom: 15px;
+}
+
+/* Subtle hover effect for the contact button */
+.contact-btn:hover {
+    background-color: #0056b3;
+}

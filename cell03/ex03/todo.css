@@ -1,0 +1,57 @@
+/* Basic page setup */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    margin: 0;
+}
+
+/* Container box styling */
+.todo-container {
+    width: 350px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the New button */
+#newBtn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#newBtn:hover {
+    background-color: #218838;
+}
+
+/* Container list for the items */
+#ft_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Styling for individual TO DO items created in JS */
+.todo-item {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    word-wrap: break-word; /* Wrap long text so it stays inside box */
+}
+
+.todo-item:hover {
+    background-color: #ffe6e6; /* Soft red hover to signal click to delete */
+}

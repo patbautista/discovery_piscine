@@ -1,0 +1,52 @@
+/* Reset basic margin and padding so the layout goes full width */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* Base styling for both parallax image sections */
+.parallax-section {
+    /* Set the section height to cover the whole screen height */
+    min-height: 100vh;
+    
+    /* Center the text container vertically and horizontally using flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* This creates the main parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* First background image using Unsplash public placeholder images */
+.image1 {
+    background-image: url('https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=1200');
+}
+
+/* Second background image */
+.image2 {
+    background-image: url('https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1200');
+}
+
+/* Middle black block section */
+.content-section {
+    background-color: black;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+    font-size: 20px;
+}
+
+/* Box styling for the message centered inside the parallax sections */
+.message {
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black box for text readability */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-align: center;
+}

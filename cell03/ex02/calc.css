@@ -1,0 +1,32 @@
+/* Center the calculator on the page */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Simple visual layout for the inputs */
+.calculator {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"], select {
+    padding: 8px 12px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
