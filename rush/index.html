@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Showcase • Pat & Nicole</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-main: #ffffff;
+      --bg-card: #f8f9fa;
+      --border-color: #e2e8f0;
+      --accent-orange: #FF6B00;
+      --accent-orange-hover: #e05e00;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --nav-height: 72px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* Views SPA Controller */
+    .view-section {
+      display: none;
+      min-height: 100vh;
+    }
+    .view-section.active {
+      display: block;
+    }
+
+    /* Navigation Bar */
+    .custom-navbar {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      height: var(--nav-height);
+      z-index: 1030;
+    }
+
+    .nav-link {
+      color: var(--text-muted) !important;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem !important;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent-orange) !important;
+    }
+
+    /* Buttons */
+    .btn-orange {
+      background-color: var(--accent-orange);
+      color: #ffffff;
+      font-weight: 600;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-orange:hover {
+      background-color: var(--accent-orange-hover);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
+    }
+
+    .btn-outline-orange {
+      border: 2px solid var(--accent-orange);
+      color: var(--accent-orange);
+      font-weight: 600;
+      background: transparent;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline-orange:hover {
+      background-color: var(--accent-orange);
+      color: #ffffff;
+    }
+
+    /* Hero & Section Badges */
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(255, 107, 0, 0.08);
+      color: var(--accent-orange);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.85rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 107, 0, 0.2);
+    }
+
+    /* Cards */
+    .profile-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .profile-card:hover {
+      border-color: var(--accent-orange);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .avatar-img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--accent-orange);
+    }
+
+    /* Skills Badges */
+    .skill-badge {
+      background-color: #ffffff;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Experience Timeline */
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 2px solid var(--border-color);
+      padding-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -7px;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--accent-orange);
+    }
+
+    /* Contact Cards */
+    .contact-item {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent-orange);
+      color: var(--accent-orange);
+      transform: translateX(4px);
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background-color: rgba(255, 107, 0, 0.1);
+      color: var(--accent-orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .content-offset {
+      padding-top: calc(var(--nav-height) + 2rem);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =================================================================== -->
+  <!-- INDEX / HOME VIEW (#home)                                          -->
+  <!-- =================================================================== -->
+  <section id="home" class="view-section active">
+    <!-- Fixed Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-dark d-flex align-items-center gap-2" href="#" onclick="showView('home')">
+          <span style="color: var(--accent-orange);"><i class="bi bi-layers-fill"></i></span> Showcase Studio
+        </a>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-orange btn-sm d-none d-sm-inline-block" onclick="showView('pat-cv')">Pat's CV</button>
+          <button class="btn btn-orange btn-sm" onclick="showView('nicole-cv')">Nicole's CV</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Hero Header -->
+    <div class="container content-offset text-center py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <span class="section-badge mb-3"><i class="bi bi-stars"></i> Showcase Directory</span>
+          <h1 class="display-4 fw-extrabold mb-3 text-dark">Hey there!</h1>
+          <p class="lead text-muted mb-5">From high-converting digital branding and image operations to secure, scalable cloud infrastructure, I help businesses turn complex visual and technical ideas into seamless, production-ready solutions. 
+            <br>Got a project in mind? Let's talk!</p>
+        </div>
+      </div>
+
+      <!-- Team Members Summary Cards -->
+      <div class="row g-4 justify-content-center align-items-stretch">
+        <!-- Pat's Card -->
+        <div class="col-md-6 col-lg-5">
+          <div class="profile-card d-flex flex-column text-center">
+            <div class="mb-4">
+              <img src="https://drive.google.com/thumbnail?id=1a8uo-zMEZYTMsZrZARwNobMsiXR31n69&sz=w500" alt="Patricia Nicole Bautista" class="avatar-img shadow-sm">
+            </div>
+            <h3 class="fw-bold mb-1">Pat Bautista</h3>
+            <p class="text-muted fw-semibold mb-3">Technical Operations & Cloud Specialist</p>
+            <p class="small text-muted mb-4 flex-grow-1">Results-driven Technical Operations Specialist with 7+ years of experience managing high-volume, SLA-critical digital asset pipelines, AWS cloud deployments, and AI-enabled automation.</p>
+            <button class="btn btn-orange w-100 mt-auto" onclick="showView('pat-cv')">
+              View Full Resume <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Nicole's Card -->
+        <div class="col-md-6 col-lg-5">
+          <div class="profile-card d-flex flex-column text-center">
+            <div class="mb-4">
+              <img src="https://drive.google.com/thumbnail?id=1cGKPSEfoFiXFoX8hohlcWya3f5Zx1tOe&sz=w500" alt="Patricia Nicole Bautista" class="avatar-img shadow-sm">
+            </div>
+            <h3 class="fw-bold mb-1">Nicole Resurreccion</h3>
+            <p class="text-muted fw-semibold mb-3">Photo Editing Specialist & Creative Director</p>
+            <p class="small text-muted mb-4 flex-grow-1">Experienced Photo Editing Specialist with 6+ years delivering high-quality images for e-commerce, real estate, and lifestyle media using Adobe Creative Suite and CMS pipelines.</p>
+            <button class="btn btn-outline-orange w-100 mt-auto" onclick="showView('nicole-cv')">
+              View Full Resume <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================================================================== -->
+  <!-- PAT BAUTISTA RESUME PAGE (#pat-cv)                                 -->
+  <!-- =================================================================== -->
+  <section id="pat-cv" class="view-section">
+    <!-- Fixed Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-dark" href="#" onclick="showView('home')">
+          <span style="color: var(--accent-orange);"><i class="bi bi-arrow-left me-1"></i></span> Pat's Resume
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#patNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="patNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="#pat-overview">Overview</a></li>
+            <li class="nav-item"><a class="nav-link" href="#pat-experience">Experience & Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#pat-contact">Contact</a></li>
+            <li class="nav-item ms-lg-3">
+              <button class="btn btn-outline-orange btn-sm" onclick="showView('nicole-cv')">Nicole's CV <i class="bi bi-arrow-right ms-1"></i></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container content-offset pb-5">
+      <!-- Overview Section -->
+      <div id="pat-overview" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-person-badge"></i> Profile Overview</span>
+        <div class="row align-items-center mt-3 g-4">
+          <div class="col-md-4 text-center">
+            <img src="https://drive.google.com/thumbnail?id=1a8uo-zMEZYTMsZrZARwNobMsiXR31n69&sz=w500" alt="Patricia Nicole Bautista" class="avatar-img shadow-sm mb-3">
+            <h2 class="fw-bold mb-1">Pat Bautista</h2>
+            <p class="text-muted fw-semibold">Technical Operations & Cloud Specialist</p>
+          </div>
+          <div class="col-md-8">
+            <h3 class="fw-bold mb-3">Cloud Operations, System Reliability & AI Workflow Engineering</h3>
+            <p class="text-muted">7+ years of experience leading high-volume, SLA-critical digital asset pipelines and cross-functional teams. Combines operational rigor with technical proficiency in AWS Cloud infrastructure, Linux administration, and AI-enabled automation to streamline technical workflows and system reliability.</p>
+            <div class="d-flex flex-wrap gap-2 pt-2">
+              <span class="skill-badge"><i class="bi bi-patch-check-fill text-warning me-1"></i> AWS re/Start Scholar</span>
+              <span class="skill-badge"><i class="bi bi-cpu-fill text-primary me-1"></i> AI Prompting for Automation (iACADEMY)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <!-- Experience & Skills Section -->
+      <div id="pat-experience" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-briefcase"></i> Experience & Skills</span>
+        
+        <div class="row mt-4 g-5">
+          <div class="col-lg-7">
+            <h4 class="fw-bold mb-4">Highlighted Work Experience</h4>
+            
+            <!-- Job 1 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Jul 2023 – Present</span>
+              <h5 class="fw-bold mb-1">Photo Editing Specialist & Technical Operations</h5>
+              <p class="text-muted small mb-2">Changing Spaces SRS • Lincoln, Nebraska (Remote)</p>
+              <ul class="text-muted small ps-3">
+                <li>Maintained 99%+ SLA compliance for high-volume pipelines processing 800+ daily assets using automated validation protocols.</li>
+                <li>Reduced turnaround times by 25% by engineering automated batch-processing scripts and structured metadata tagging.</li>
+                <li>Systematized CMS content ingestion and database uploads, executing verification checks to eliminate operational errors.</li>
+              </ul>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Nov 2021 – Jun 2022</span>
+              <h5 class="fw-bold mb-1">Social Media Manager & Digital Operations</h5>
+              <p class="text-muted small mb-2">Onlinejobs PH • Multiple US Clients</p>
+              <ul class="text-muted small ps-3">
+                <li>Drove 130% organic audience growth by architecting multi-channel publishing calendars and automating distribution using CMS tools.</li>
+                <li>Achieved a &lt;12-hour resolution SLA and increased client satisfaction scores by 30% by streamlining ticketing workflows.</li>
+              </ul>
+            </div>
+
+            <!-- Job 3 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Mar 2017 – Present</span>
+              <h5 class="fw-bold mb-1">Freelance Lead Photographer & Studio Manager</h5>
+              <p class="text-muted small mb-2">Beyond Moments / MCPF Studios / Snappr</p>
+              <ul class="text-muted small ps-3">
+                <li>Accelerated delivery cycles by 40% by directing end-to-end digital photography workflows, styling, and post-production archives.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <h4 class="fw-bold mb-4">Technical Stack</h4>
+            
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">AWS & Cloud Infrastructure</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">AWS EC2</span>
+                <span class="skill-badge">Amazon S3</span>
+                <span class="skill-badge">Amazon VPC</span>
+                <span class="skill-badge">AWS IAM</span>
+                <span class="skill-badge">CloudWatch</span>
+                <span class="skill-badge">Auto Scaling</span>
+                <span class="skill-badge">AWS CLI</span>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">Linux, Systems & AI Automation</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">Linux CLI / Ubuntu</span>
+                <span class="skill-badge">Bash Scripting</span>
+                <span class="skill-badge">Python Fundamentals</span>
+                <span class="skill-badge">Git / GitHub</span>
+                <span class="skill-badge">Prompt Engineering</span>
+                <span class="skill-badge">Google AI Studio / Gemini</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <!-- Contact Section -->
+      <div id="pat-contact" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-envelope"></i> Contact Details</span>
+        <h3 class="fw-bold mb-4">Get In Touch With Pat</h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4">
+            <a href="mailto:takeyoutothefutur@gmail.com" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">Email Address</small>
+                <span class="fw-bold">takeyoutothefutur@gmail.com</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="https://www.linkedin.com/in/patbautista-cloudtech/" target="_blank" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-linkedin"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">LinkedIn Profile</small>
+                <span class="fw-bold">/in/patbautista-cloudtech</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="tel:+639052897334" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">Contact Phone</small>
+                <span class="fw-bold">+63 905 289 7334</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================================================================== -->
+  <!-- NICOLE RESURRECCION RESUME PAGE (#nicole-cv)                        -->
+  <!-- =================================================================== -->
+  <section id="nicole-cv" class="view-section">
+    <!-- Fixed Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-dark" href="#" onclick="showView('home')">
+          <span style="color: var(--accent-orange);"><i class="bi bi-arrow-left me-1"></i></span> Nicole's Resume
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nicoleNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nicoleNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="#nicole-overview">Overview</a></li>
+            <li class="nav-item"><a class="nav-link" href="#nicole-experience">Experience & Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#nicole-contact">Contact</a></li>
+            <li class="nav-item ms-lg-3">
+              <button class="btn btn-orange btn-sm" onclick="showView('pat-cv')"><i class="bi bi-arrow-left me-1"></i> Pat's CV</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container content-offset pb-5">
+      <!-- Overview Section -->
+      <div id="nicole-overview" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-palette"></i> Profile Overview</span>
+        <div class="row align-items-center mt-3 g-4">
+          <div class="col-md-4 text-center">
+            <img src="https://drive.google.com/thumbnail?id=1cGKPSEfoFiXFoX8hohlcWya3f5Zx1tOe&sz=w500" alt="Patricia Nicole Bautista" class="avatar-img shadow-sm mb-3">
+            <h2 class="fw-bold mb-1">Nicole Resurreccion</h2>
+            <p class="text-muted fw-semibold">Photo Editing Specialist & Creative Director</p>
+          </div>
+          <div class="col-md-8">
+            <h3 class="fw-bold mb-3">High-Volume Digital Asset & Creative Media Specialist</h3>
+            <p class="text-muted">Experienced Photo Editing Specialist with 6+ years delivering high-quality visual media for portrait, e-commerce, and real estate marketing. Expert in Adobe Creative Suite, advanced retouching, color grading, batch asset management, and CMS web optimization.</p>
+            <div class="d-flex flex-wrap gap-2 pt-2">
+              <span class="skill-badge"><i class="bi bi-patch-check-fill text-primary me-1"></i> Adobe Creative Suite Expert</span>
+              <span class="skill-badge"><i class="bi bi-check-circle-fill text-success me-1"></i> E-Commerce & MLS Compliance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <!-- Experience & Skills Section -->
+      <div id="nicole-experience" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-briefcase"></i> Experience & Skills</span>
+        
+        <div class="row mt-4 g-5">
+          <div class="col-lg-7">
+            <h4 class="fw-bold mb-4">Highlighted Work Experience</h4>
+            
+            <!-- Job 1 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Jul 2023 – Present</span>
+              <h5 class="fw-bold mb-1">Photo Editing Specialist</h5>
+              <p class="text-muted small mb-2">Changing Spaces SRS • Lincoln, Nebraska (Remote)</p>
+              <ul class="text-muted small ps-3">
+                <li>Edited and enhanced 800+ auction estate images daily using Adobe Lightroom and Photoshop.</li>
+                <li>Executed precise photo resizing, cropping, color correction, and formatting for MLS and web listing compliance.</li>
+                <li>Uploaded and structured final image packages directly into client CMS platforms.</li>
+              </ul>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Oct 2020 – Jan 2022</span>
+              <h5 class="fw-bold mb-1">Photo Editing Lead</h5>
+              <p class="text-muted small mb-2">Luxclusif (Farfetch) • Makati City, Philippines</p>
+              <ul class="text-muted small ps-3">
+                <li>Procured, edited, and verified all published photography content for luxury e-commerce platforms according to strict brand guidelines.</li>
+                <li>Streamlined photo pipeline workflows to boost monthly output KPI by 35%.</li>
+              </ul>
+            </div>
+
+            <!-- Job 3 -->
+            <div class="timeline-item">
+              <span class="badge bg-light text-dark border mb-2">Mar 2017 – Present</span>
+              <h5 class="fw-bold mb-1">Wedding & Commercial Photo Editor</h5>
+              <p class="text-muted small mb-2">Upwork • Multiple US & Global Clients</p>
+              <ul class="text-muted small ps-3">
+                <li>Processed and retouched high-volume event, wedding, and product photography galleries under tight client turnaround deadlines.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <h4 class="fw-bold mb-4">Creative Tech Stack</h4>
+            
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">Editing Software</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">Adobe Photoshop</span>
+                <span class="skill-badge">Adobe Lightroom</span>
+                <span class="skill-badge">Adobe Bridge</span>
+                <span class="skill-badge">Capture One Pro</span>
+                <span class="skill-badge">Luminar AI</span>
+                <span class="skill-badge">Adobe Illustrator</span>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="fw-bold text-muted small text-uppercase mb-2">Specializations</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="skill-badge">Image Quality Control (QC)</span>
+                <span class="skill-badge">Color Correction</span>
+                <span class="skill-badge">Real Estate MLS Editing</span>
+                <span class="skill-badge">E-Commerce Asset Pipeline</span>
+                <span class="skill-badge">Batch Processing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color);">
+
+      <!-- Contact Section -->
+      <div id="nicole-contact" class="py-5">
+        <span class="section-badge mb-3"><i class="bi bi-envelope"></i> Contact Details</span>
+        <h3 class="fw-bold mb-4">Get In Touch With Nicole</h3>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4">
+            <a href="mailto:takeyoutothefutur@gmail.com" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">Email Address</small>
+                <span class="fw-bold">takeyoutothefutur@gmail.com</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="tel:+639052897334" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">Contact Phone</small>
+                <span class="fw-bold">+63 905 289 7334</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="https://www.linkedin.com/in/patbautista-cloudtech/" target="_blank" class="contact-item">
+              <div class="contact-icon"><i class="bi bi-linkedin"></i></div>
+              <div>
+                <small class="text-muted d-block fw-semibold">LinkedIn Profile</small>
+                <span class="fw-bold">Connect on LinkedIn</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript SPA Controller & Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showView(viewId) {
+      document.querySelectorAll('.view-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      const activeSection = document.getElementById(viewId);
+      if (activeSection) {
+        activeSection.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
+</body>
+</html>

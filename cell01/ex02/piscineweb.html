@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Piscine Web</title>
     <style>
-        /* Center the main heading */
-        h1 {
+        /* Center everything nicely */
+        body {
             text-align: center;
+            font-family: Arial, sans-serif;
         }
 
-        /* Center images and stack them vertically */
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 100%; /* Ensures large images fit nicely on smaller screens */
+        /* Container to hold both images side-by-side and centered */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Space between the images */
+            margin-top: 20px;
+        }
+
+        /* Set a clean, controlled size for the images */
+        .image-container img {
+            max-width: 400px; /* Adjust this to make them bigger or smaller */
+            width: 100%;
             height: auto;
         }
     </style>
 </head>
-
 <body>
     <h1>Piscine Web</h1>
 
-    <!-- Image 1 -->
-    <img src="https://s3.amazonaws.com/rails-camp-tutorials/blog/programming+memes/states-of-a-programmer.png.png" alt="Piscine Program Schedule" width="400">
-
-    <br> <!-- Spacing between images -->
-
-    <!-- Image 2 -->
-    <img src="https://i.programmerhumor.io/2025/03/13b79a8785e130c1eb369362c9fc4b20.jpeg" alt="The Two Faces Of Development" width="1080" height="873">
+    <div class="image-container">
+        <img src="https://s3.amazonaws.com/rails-camp-tutorials/blog/programming+memes/programming-or-googling.jpg" alt="large">
+        <img src="https://s3.amazonaws.com/rails-camp-tutorials/blog/programming+memes/states-of-a-programmer.png" alt="large">
+    </div>
 </body>
 </html>

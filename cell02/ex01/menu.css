@@ -1,0 +1,74 @@
+/* Basic page setup */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    padding: 50px;
+}
+
+/* Remove default list styling */
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* The main horizontal navigation bar */
+.main-menu {
+    background-color: #2c3e50; /* Dark blue/grey */
+    display: flex; /* Aligns items horizontally */
+    border-radius: 5px;
+}
+
+/* The parent list items */
+.main-menu > li {
+    position: relative; /* Crucial: Allows the dropdown to position itself relative to this item */
+}
+
+/* The links inside the menu */
+.main-menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    transition: background-color 0.3s ease;
+}
+
+.main-menu a:hover {
+    background-color: #34495e; /* Slightly lighter blue on hover */
+}
+
+/* --- THE DROPDOWN MAGIC --- */
+
+/* 1. Hide the dropdown by default and style the box */
+.dropdown-content {
+    display: none; /* Hidden completely */
+    position: absolute; /* Takes it out of the normal flow */
+    top: 100%; /* Pushes it exactly below the parent item */
+    left: 0;
+    background-color: white;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+}
+
+/* 2. Style the links inside the dropdown */
+.dropdown-content a {
+    color: #333;
+    padding: 12px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: #e74c3c; /* SNCF red accent color on hover */
+}
+
+.dropdown-content li:last-child a {
+    border-bottom: none; /* Removes the border from the very last item */
+}
+
+/* 3. SHOW the dropdown when you hover over its parent (.dropdown) */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
