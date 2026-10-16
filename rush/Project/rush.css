@@ -1,56 +1,66 @@
-/* Global Color Variables & Constants */
 :root {
-  --bg-main: #ffffff;
-  --bg-card: #f8f9fa;
-  --border-color: #e2e8f0;
-  --accent-orange: #FF6B00;
-  --accent-orange-hover: #e05e00;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --nav-height: 72px;
+  --bg-main: #ffffff;             /* Primary page background */
+  --bg-card: #f8f9fa;             /* Background for profile and contact cards */
+  --border-color: #e2e8f0;        /* Subtle border dividers */
+  --accent-orange: #FF6B00;       /* Primary brand accent color */
+  --accent-orange-hover: #e05e00; /* Darker orange state for hover interactions */
+  --text-main: #0f172a;           /* Dark slate primary body text */
+  --text-muted: #64748b;          /* Soft gray secondary text */
+  --nav-height: 72px;             /* Fixed navigation header height */
 }
 
+/* Base Body Styles */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
   line-height: 1.6;
   scroll-behavior: smooth;
-  padding-bottom: 80px; /* Space for fixed bottom footer */
+  padding-bottom: 80px; /* Offset space so content is not obscured by fixed footer */
 }
 
-/* Single Page Application (SPA) View Controller */
+/* =================================================================== */
+/* SINGLE PAGE APPLICATION (SPA) ROUTING CONTROLLER                    */
+/* =================================================================== */
+/* Hides all view sections by default. Only the section with .active    */
+/* gets displayed, simulating instant page switches without reloading.   */
 .view-section {
   display: none;
-  min-height: calc(100vh - 80px);
-}
-.view-section.active {
-  display: block;
+  min-height: calc(100vh - 80px); /* Fill screen height minus footer height */
 }
 
-/* Navigation Bar */
+.view-section.active {
+  display: block; /* Visible page view */
+}
+
+/* =================================================================== */
+/* NAVIGATION BAR COMPONENTS                                           */
+/* =================================================================== */
 .custom-navbar {
   background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px); /* Translucent frosted glass effect on scroll */
   border-bottom: 1px solid var(--border-color);
   height: var(--nav-height);
   z-index: 1030;
 }
 
-/* Piscine Rush Brand Logo Formatting */
+/* Brand Logo Typography */
 .brand-logo {
   font-weight: 800;
   letter-spacing: 0.5px;
   font-size: 1.15rem;
 }
+
 .brand-logo .code-icon {
   color: var(--accent-orange);
   font-weight: 700;
 }
+
 .brand-logo .brand-highlight {
   color: var(--accent-orange);
 }
 
+/* Navigation Link States */
 .nav-link {
   color: var(--text-muted) !important;
   font-weight: 500;
@@ -63,7 +73,15 @@ body {
   color: var(--accent-orange) !important;
 }
 
-/* Interactive Buttons */
+/* Offset top padding for content containers under fixed navbar */
+.content-offset {
+  padding-top: calc(var(--nav-height) + 2rem);
+}
+
+/* =================================================================== */
+/* BUTTON COMPONENTS                                                   */
+/* =================================================================== */
+/* Solid Orange Accent Button */
 .btn-orange {
   background-color: var(--accent-orange);
   color: #ffffff;
@@ -77,10 +95,11 @@ body {
 .btn-orange:hover {
   background-color: var(--accent-orange-hover);
   color: #ffffff;
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* Slight lift effect on hover */
   box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
 }
 
+/* Outline Orange Accent Button */
 .btn-outline-orange {
   border: 1px solid var(--accent-orange);
   color: var(--accent-orange);
@@ -96,7 +115,10 @@ body {
   color: #ffffff;
 }
 
-/* Component Cards & Badges */
+/* =================================================================== */
+/* CARDS, BADGES, AND PORTRAIT IMAGES                                  */
+/* =================================================================== */
+/* Section Header Badges */
 .section-badge {
   display: inline-flex;
   align-items: center;
@@ -112,6 +134,7 @@ body {
   border: 1px solid rgba(255, 107, 0, 0.2);
 }
 
+/* Profile Showcase Cards */
 .profile-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -123,10 +146,11 @@ body {
 
 .profile-card:hover {
   border-color: var(--accent-orange);
-  transform: translateY(-4px);
+  transform: translateY(-4px); /* Elevation effect on hover */
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
 }
 
+/* Circular Avatar Headshots */
 .avatar-img {
   width: 140px;
   height: 140px;
@@ -135,6 +159,7 @@ body {
   border: 3px solid var(--accent-orange);
 }
 
+/* Tech Stack Skill Pill Badges */
 .skill-badge {
   background-color: #ffffff;
   color: var(--text-main);
@@ -147,7 +172,10 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Timeline Components */
+/* =================================================================== */
+/* WORK EXPERIENCE TIMELINE                                           */
+/* =================================================================== */
+/* Left border serves as vertical timeline thread */
 .timeline-item {
   position: relative;
   padding-left: 2rem;
@@ -155,6 +183,7 @@ body {
   padding-bottom: 2rem;
 }
 
+/* Pseudo-element creates the orange dot on top of vertical line */
 .timeline-item::before {
   content: '';
   position: absolute;
@@ -166,7 +195,9 @@ body {
   background-color: var(--accent-orange);
 }
 
-/* Contact Links */
+/* =================================================================== */
+/* CONTACT LINK CARDS                                                  */
+/* =================================================================== */
 .contact-item {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -183,7 +214,7 @@ body {
 .contact-item:hover {
   border-color: var(--accent-orange);
   color: var(--accent-orange);
-  transform: translateX(4px);
+  transform: translateX(4px); /* Horizontal shift on hover */
 }
 
 .contact-icon {
@@ -198,11 +229,9 @@ body {
   font-size: 1.25rem;
 }
 
-.content-offset {
-  padding-top: calc(var(--nav-height) + 2rem);
-}
-
-/* Universal Footer Styling */
+/* =================================================================== */
+/* UNIVERSAL FOOTER STYLING                                           */
+/* =================================================================== */
 footer {
   background-color: #ffffff;
   border-top: 1px solid var(--border-color);
