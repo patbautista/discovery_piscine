@@ -1,3 +1,5 @@
+var selectedProfileView = null;
+
 // Function to switch between pages/views
 function showView(viewId) {
   // Get all sections that have the class 'view-section'
@@ -13,6 +15,14 @@ function showView(viewId) {
   
   // If the section exists, show it by adding the 'active' class
   if (targetSection) {
+    if (viewId === 'pat-cv' || viewId === 'nicole-cv') {
+      selectedProfileView = viewId;
+    }
+
+    document.querySelectorAll('.profile-action').forEach(function(button) {
+      button.classList.toggle('is-selected', button.dataset.profileView === selectedProfileView);
+    });
+
     targetSection.classList.add('active');
     
     // Scroll back to top of the page

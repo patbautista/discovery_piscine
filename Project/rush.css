@@ -119,6 +119,20 @@ body {
   color: #ffffff;
 }
 
+.profile-card .btn-outline-orange {
+  background-color: #ffffff;
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.profile-card .btn-outline-orange.is-selected,
+.profile-card .btn-outline-orange:focus-visible,
+.profile-card .btn-outline-orange:active {
+  background-color: var(--accent-orange);
+  border-color: var(--accent-orange);
+  color: #ffffff;
+}
+
 /* =================================================================== */
 /* CARDS, BADGES, AND PORTRAIT IMAGES                                  */
 /* =================================================================== */
