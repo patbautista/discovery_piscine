@@ -78,6 +78,10 @@ body {
   padding-top: calc(var(--nav-height) + 2rem);
 }
 
+#home > .content-offset {
+  padding-top: calc(var(--nav-height) + 5rem) !important;
+}
+
 /* =================================================================== */
 /* BUTTON COMPONENTS                                                   */
 /* =================================================================== */
